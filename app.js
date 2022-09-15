@@ -13,24 +13,26 @@ function isPalindrome(str) {
 // var str = "racecar";
 // console.log(isPalindrome(str));
 
-function convertNumberToStr(dateStr) {
-  if (dateStr.day > 10) {
-    dateStr.day = "0" + dateStr.day;
+function convertNumberToStr(date) {
+  var dateStr = { day: "", month: "", year: "" };
+  if (date.day > 10) {
+    dateStr.day = "0" + date.day;
   } else {
-    dateStr.day = dateStr.day.toString();
+    dateStr.day = date.day.toString();
   }
-  if (dateStr.month > 10) {
-    dateStr.month = "0" + dateStr.month;
+  if (date.month > 10) {
+    dateStr.month = "0" + date.month;
   } else {
-    dateStr.month = dateStr.month.toString();
+    dateStr.month = date.month.toString();
   }
-  dateStr.year = dateStr.year.toString();
+  dateStr.year = date.year.toString();
+  return dateStr;
 }
 
-var dateStr = {
+var date = {
   day: "4",
   month: "2",
   year: "2020",
 };
 
-console.log(typeof dateStr);
+console.log(dateStr);
