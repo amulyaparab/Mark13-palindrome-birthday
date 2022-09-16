@@ -7,7 +7,7 @@ function reverseStr(str) {
 
 function isPalindrome(str) {
   var reverse = reverseStr(str);
-  str === reverse;
+  return str === reverse;
 }
 
 function convertNumberToString(date) {
@@ -27,10 +27,38 @@ function convertNumberToString(date) {
   return dateStr;
 }
 
+function getAllDateFormats(date) {
+  var dateStr = convertNumberToString(date);
+  var day = dateStr.day;
+  var month = dateStr.month;
+  var year = dateStr.year;
+
+  var ddmmyyyy = dateStr.day + dateStr.month + dateStr.year;
+  var mmddyyyy = dateStr.month + dateStr.day + dateStr.year;
+  var yyyymmdd = dateStr.year + dateStr.month + dateStr.day;
+  var ddmmyy = dateStr.day + dateStr.month + dateStr.year.slice(-2);
+  var mmddyy = dateStr.month + dateStr.day + dateStr.year.slice(-2);
+  var yymmdd = dateStr.year.slice(-2) + dateStr.month + dateStr.day;
+
+  return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yymmdd];
+}
+
+function checkPalindromeForAllDateFormats(date) {
+  var listOfPalindromes = getAllDateFormats(date);
+  var isItPalindrome = false;
+
+  for (var i = 0; i < listOfPalindromes.length; i++) {
+    if (isPalindrome(listOfPalindromes[i])) {
+      var isItPalindrome = true;
+      break;
+    }
+  }
+  return isItPalindrome;
+}
 var date = {
-  day: "13",
-  month: "14",
-  year: "1990",
+  day: "22",
+  month: "2",
+  year: "2022",
 };
 
-console.log(convertNumberToString(date));
+console.log(checkPalindromeForAllDateFormats(date));
