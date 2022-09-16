@@ -1,4 +1,4 @@
-# Palindrome birthday(Mark13-neogcamp)
+# Palindrome birthday (Mark13-neogcamp)
 This app was created using vanillaJS, HTML, and CSS.
 
 # How it works
