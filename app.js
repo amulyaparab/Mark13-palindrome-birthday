@@ -47,7 +47,6 @@ function getAllDateFormats(date) {
 function checkPalindromeForAllDateFormats(date) {
   var listOfFormats = getAllDateFormats(date);
   var isItPalindrome = false;
-
   for (var i = 0; i < listOfFormats.length; i++) {
     if (isPalindrome(listOfFormats[i])) {
       isItPalindrome = true;
@@ -104,6 +103,36 @@ function getNextDate(date) {
     year: year,
   };
 }
+function getPreviousDate(date) {
+  var day = date.day - 1;
+  var month = date.month;
+  var year = date.year;
+  var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (day == 0) {
+    month--;
+    if (month == 2) {
+      if (isLeapYear(year)) {
+        day = 29;
+      } else {
+        day = 28;
+      }
+    }
+    if (month != 2) {
+      day = daysInMonth[month - 1];
+    }
+  }
+  if (month === 0) {
+    day = 31;
+    month = 12;
+    year--;
+  }
+
+  return {
+    day: day,
+    month: month,
+    year: year,
+  };
+}
 
 function getNextPalindromeDate(date) {
   var ctr = 0;
@@ -120,6 +149,20 @@ function getNextPalindromeDate(date) {
   return [ctr, nextDate];
 }
 
+function getPreviousPalindromeDate(date) {
+  var previousCtr = 0;
+  var previousDate = date;
+  while (1) {
+    var isPalindrome = checkPalindromeForAllDateFormats(previousDate);
+    if (isPalindrome) {
+      break;
+    } else {
+      previousCtr++;
+      previousDate = getPreviousDate(previousDate);
+    }
+  }
+  return [previousCtr, previousDate];
+}
 function clickHandler() {
   var bdayStr = birthdayInput.value;
 
@@ -139,17 +182,31 @@ function clickHandler() {
     birthdayOutput.innerText = "Yayy! Your birthday is a Palindrome!!🥳🥳";
   } else {
     var [ctr, nextDate] = getNextPalindromeDate(date);
-    birthdayOutput.innerText =
-      "Your birthday is not a Palindrome... The next Palindrome date is " +
-      nextDate.day +
-      "-" +
-      nextDate.month +
-      "-" +
-      nextDate.year +
-      ". You missed by " +
-      ctr +
-      " days!🥺";
+    var [previousCtr, previousDate] = getPreviousPalindromeDate(date);
+
+    if (ctr < previousCtr) {
+      birthdayOutput.innerText =
+        "Your birthday isn't a Palindrome... The nearest Palindrome date is " +
+        nextDate.day +
+        "-" +
+        nextDate.month +
+        "-" +
+        nextDate.year +
+        ". It is " +
+        ctr +
+        " days later.🥺";
+    } else {
+      birthdayOutput.innerText =
+        "Your birthday isn't a Palindrome... The nearest Palindrome date is " +
+        previousDate.day +
+        "-" +
+        previousDate.month +
+        "-" +
+        previousDate.year +
+        ". It was " +
+        previousCtr +
+        " days ago.🥺";
+    }
   }
 }
-
 showBtn.addEventListener("click", clickHandler);

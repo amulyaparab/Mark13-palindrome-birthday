@@ -37,6 +37,12 @@ h1 {
 
 #user-birthday {
   border-radius: 0.5rem;
+  margin-top: 1px;
+}
+
+label {
+  font-weight: bold;
+  color: #fb923c;
 }
 
 #output {
