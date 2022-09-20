@@ -5,5 +5,5 @@ This app was created using vanillaJS, HTML, and CSS.
 * Enter your birthdate and click the show button.
 * Find out whether your birthday is a Palindrome or not.
 * If your birthday is not a palindrome we tell you:
-   * The next palindrome date 
-   * How many days you missed it by
+   * The nearest(next or previous) palindrome date 
+   * How many days ago/later it was (days you missed it by)
